@@ -1,19 +1,22 @@
+# RaspAP Portable Object file
+# Project home: https://github.com/billz/raspap-webgui
+# Licensed under the GNU General Public License v3.0
+# This file is distributed under the same license as the RaspAP package
+# FIRST AUTHOR Simone Rizzo <simone.rizzo@live.com>, 2017
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: raspap\n"
+"Project-Id-Version: 1.2.1\n"
 "Report-Msgid-Bugs-To: Bill Zimmerman <billzimmerman@gmail.com>\n"
 "POT-Creation-Date: 2017-10-19 08:56+0000\n"
-"PO-Revision-Date: 2020-04-14 08:51\n"
-"Last-Translator: Marco Fantauzzo <marco97pa@live.it>\n"
-"Language-Team: Italian\n"
-"Language: it_IT\n"
+"PO-Revision-Date: 2019-10-21 23:15+0000\n"
+"Last-Translator: Simone Rizzo <simone.rizzo@live.com>\n"
+"Language-Team: \n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: raspap\n"
-"X-Crowdin-Language: it\n"
-"X-Crowdin-File: /master/locale/en_US/LC_MESSAGES/messages.po\n"
 
 #: index.php
 msgid "RaspAP Wifi Configuration Portal"
@@ -23,37 +26,31 @@ msgid "Toggle navigation"
 msgstr "Mostra/nascondi navigazione"
 
 msgid "RaspAP Wifi Portal"
-msgstr "Portale RaspAP WiFi"
+msgstr "RaspAP Wifi Portal"
 
 msgid "Dashboard"
 msgstr "Dashboard"
 
-msgid "WiFi client"
-msgstr "Client WiFi"
+msgid "Configure WiFi client"
+msgstr "Configura client WiFi"
 
-msgid "Hotspot"
-msgstr "Hotspot"
+msgid "Configure hotspot"
+msgstr "Configura hotspot"
 
-msgid "Memory Use"
-msgstr "Memoria utilizzata"
+msgid "Configure networking"
+msgstr "Configura rete"
 
-msgid "CPU Temp"
-msgstr "Temperatura CPU"
+msgid "Configure DHCP Server"
+msgstr "Configura server DHCP"
 
-msgid "Networking"
-msgstr "Rete"
+msgid "Configure OpenVPN"
+msgstr "Configura OpenVPN"
 
-msgid "DHCP Server"
-msgstr "Server DHCP"
+msgid "Configure TOR proxy"
+msgstr "Configura proxy TOR"
 
-msgid "OpenVPN"
-msgstr "OpenVPN"
-
-msgid "TOR proxy"
-msgstr "Proxy TOR"
-
-msgid "Authentication"
-msgstr "Autenticazione"
+msgid "Configure Auth"
+msgstr "Configura Auth"
 
 msgid "Change Theme"
 msgstr "Cambia tema"
@@ -114,8 +111,8 @@ msgstr "Chiave di sicurezza"
 msgid "Wifi settings updated successfully"
 msgstr "Impostazioni Wifi aggiornate con successo"
 
-msgid "Wifi settings updated but cannot restart (cannot execute 'wpa_cli reconfigure')"
-msgstr "Impostazioni WiFi aggiornate, ma non è stato possibile riavviare (impossibile eseguire 'wpa_cli reconfigure')"
+msgid "Wifi settings updated but cannot restart (cannon execute 'wpa_cli reconfigure')"
+msgstr "Impostazioni Wifi aggiornate ma impossibile riavviare (impossibile eseguire 'wpa_cli reconfigure')"
 
 msgid "Wifi settings failed to be updated"
 msgstr "Non è stato possibile aggiornare le impostazioni Wifi"
@@ -181,8 +178,8 @@ msgstr "Pacchetti trasmessi"
 msgid "Transferred Bytes"
 msgstr "Bytes trasmessi"
 
-msgid "Wireless Client"
-msgstr ""
+msgid "Wireless Information"
+msgstr "Informazioni wireless"
 
 msgid "Connected To"
 msgstr "Connesso a"
@@ -250,9 +247,6 @@ msgstr "Lista client"
 
 msgid "Interface"
 msgstr "Interfaccia"
-
-msgid "DNS Server"
-msgstr "Server DNS"
 
 msgid "Starting IP Address"
 msgstr "Indirizzo IP iniziale"
@@ -322,33 +316,6 @@ msgstr "Dnsmasq è in esecuzione"
 
 msgid "Dnsmasq is not running"
 msgstr "Dnsmasq non è in esecuzione"
-
-msgid "Upstream DNS servers"
-msgstr "Upstream DNS servers"
-
-msgid "Only ever query DNS servers configured below"
-msgstr "Cerca sempre soltanto i server DNS configurati qui sotto"
-
-msgid "Enable this option if you want RaspAP to <b>send DNS queries to the servers configured below exclusively</b>. By default RaspAP also uses its upstream DHCP server's name servers."
-msgstr "Abilita questa opzione se desideri che RaspAP <b>invii query DNS esclusivamente ai server configurati di seguito</b>. Per impostazione predefinita RaspAP utilizza anche i nomi degli upstream DHCP server."
-
-msgid "This option adds <code>no-resolv</code> to the dnsmasq configuration."
-msgstr "Questa opzione aggiunge <code>no-resolv</code> alla configurazione dnsmasq."
-
-msgid "Add upstream DNS server"
-msgstr "Aggiungi server DNS upstream"
-
-msgid "Format"
-msgstr "Formato"
-
-msgid "Choose a hosted server"
-msgstr "Scegli un hosted server"
-
-msgid "Log DHCP requests"
-msgstr "Registra le richieste DHCP"
-
-msgid "Log DNS queries"
-msgstr "Registra query DNS"
 
 #: includes/hostapd.php
 msgid "Basic"
@@ -420,9 +387,6 @@ msgstr "Avvia l'hotspot"
 msgid "Stop hotspot"
 msgstr "Ferma l'hotspot"
 
-msgid "Restart hotspot"
-msgstr "Riavvia l'hotspot"
-
 msgid "Enable logging"
 msgstr "Abilita la registrazione"
 
@@ -431,9 +395,6 @@ msgstr "File di log in uscita"
 
 msgid "WiFi client AP mode"
 msgstr "AP WiFi modalità client"
-
-msgid "Bridged AP mode"
-msgstr "Modalità AP Bridged"
 
 msgid "Hide SSID in broadcast"
 msgstr "Nascondere la trasmissione del SSID"
@@ -453,6 +414,9 @@ msgstr "Impostazioni attuali"
 
 msgid "Default Gateway"
 msgstr "Gateway predefinito"
+
+msgid "DNS Server"
+msgstr "Server DNS"
 
 msgid "Alternate DNS Server"
 msgstr "Server DNS alternativo"
@@ -612,7 +576,7 @@ msgid "Diffie Hellman parameters"
 msgstr "Parametri Diffie Hellman"
 
 msgid "KeepAlive"
-msgstr "Keep Alive"
+msgstr "KeepAlive"
 
 msgid "Server log"
 msgstr "Log del server"
@@ -646,7 +610,7 @@ msgid "Relay settings"
 msgstr "Impostazioni di inoltro"
 
 msgid "Nickname"
-msgstr "Soprannome"
+msgstr "Nickname"
 
 msgid "Address"
 msgstr "Indirizzo"
@@ -665,10 +629,6 @@ msgstr "Tentativo di avviare TOR in corso"
 
 msgid "Attempting to stop TOR"
 msgstr "Tentativo di arrestare TOR in corso"
-
-#: template/dashboard.php
-msgid "Bridged AP mode is enabled. For Hostname and IP, see your router's admin page."
-msgstr "La modalità AP Bridged è abilitata. Per l'hostname e l'IP, consulta la pagina di amministrazione del router."
 
 #: common form controls
 msgid "Save settings"
@@ -691,46 +651,4 @@ msgstr "su"
 
 msgid "down"
 msgstr "giù"
-
-msgid "adblock"
-msgstr "AdBlock"
-
-msgid "Ad Blocking"
-msgstr "Blocco degli annunci"
-
-msgid "Start Ad Blocking"
-msgstr "Avvia blocco degli annunci"
-
-msgid "Restart Ad Blocking"
-msgstr "Riavvia blocco degli annunci"
-
-msgid "Blocklist settings"
-msgstr "Impostazioni Blocklist"
-
-msgid "Enable blocklists"
-msgstr "Abilita blocklist"
-
-msgid "Enable this option if you want RaspAP to <b>block DNS requests for ads, tracking and other virtual garbage</b>. Blocklists are gathered from multiple, actively maintained sources and automatically updated, cleaned, optimized and moderated on a daily basis."
-msgstr "Abilita questa opzione se vuoi che RaspAP blocchi <b>le richieste DNS per pubblicità, tracciamento e altra spazzatura virtuale</b>. Le Blocklist sono raccolte da fonti multiple, gestite attivamente e automaticamente aggiornate, pulite, ottimizzate e moderate su base quotidiana."
-
-msgid "This option adds <code>conf-file</code> and <code>addn-hosts</code> to the dnsmasq configuration."
-msgstr "Questa opzione aggiunge <code>conf-file</code> e <code>addn-host</code> alla configurazione dnsmasq."
-
-msgid "Choose a blocklist provider"
-msgstr "Scegli un provider di blocklist"
-
-msgid "Hostnames blocklist last updated"
-msgstr "Ultimo aggiornamento blocklist hostnames"
-
-msgid "Domains blocklist last updated"
-msgstr "Ultimo aggiornamento blocklist domini"
-
-msgid "Update now"
-msgstr "Aggiorna adesso"
-
-msgid "Statistics"
-msgstr "Statistiche"
-
-msgid "Information provided by adblock"
-msgstr "Informazioni fornite da Adblock"
 

@@ -4,7 +4,7 @@
         <div class="card-header">
           <div class="row">
             <div class="col">
-              <i class="fas fa-key fa-fw mr-2"></i><?php echo _("OpenVPN"); ?>
+              <i class="fas fa-key fa-fw mr-2"></i><?php echo _("Configure OpenVPN"); ?>
             </div>
             <div class="col">
               <button class="btn btn-light btn-icon-split btn-sm service-status float-right">
@@ -59,7 +59,8 @@
                 <div class="row">
                   <div class="form-group col-md-8">
                     <?php
-                        echo '<textarea class="logoutput"></textarea>';
+                        $log = file_get_contents('/tmp/openvpn.log');
+                        echo '<textarea class="logoutput">'.htmlspecialchars($log, ENT_QUOTES).'</textarea>';
                     ?>
                   </div>
                 </div>

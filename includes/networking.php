@@ -1,11 +1,11 @@
 <?php
 
-require_once 'includes/status_messages.php';
+include_once('includes/status_messages.php');
 
 /**
- *
- *
- */
+*
+*
+*/
 function DisplayNetworkingConfig()
 {
 

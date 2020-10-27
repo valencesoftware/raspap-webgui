@@ -55,8 +55,8 @@ function safefilerewrite($fileName, $dataToSave)
 }
 
 /**
- * Saves a CSRF token in the session
- */
+* Saves a CSRF token in the session
+*/
 function ensureCSRFSessionToken()
 {
     if (empty($_SESSION['csrf_token'])) {
@@ -65,8 +65,10 @@ function ensureCSRFSessionToken()
 }
 
 /**
- * Add CSRF Token to form
- */
+*
+* Add CSRF Token to form
+*
+*/
 function CSRFTokenFieldTag()
 {
     $token = htmlspecialchars($_SESSION['csrf_token']);
@@ -74,8 +76,8 @@ function CSRFTokenFieldTag()
 }
 
 /**
- * Retuns a CSRF meta tag (for use with xhr, for example)
- */
+* Retuns a CSRF meta tag (for use with xhr, for example)
+*/
 function CSRFMetaTag()
 {
     $token = htmlspecialchars($_SESSION['csrf_token']);
@@ -83,8 +85,10 @@ function CSRFMetaTag()
 }
 
 /**
- * Validate CSRF Token
- */
+*
+* Validate CSRF Token
+*
+*/
 function CSRFValidate()
 {
     $post_token   = $_POST['csrf_token'];
@@ -108,8 +112,8 @@ function CSRFValidate()
 }
 
 /**
- * Should the request be CSRF-validated?
- */
+* Should the request be CSRF-validated?
+*/
 function csrfValidateRequest()
 {
     $request_method = strtolower($_SERVER['REQUEST_METHOD']);
@@ -117,8 +121,8 @@ function csrfValidateRequest()
 }
 
 /**
- * Handle invalid CSRF
- */
+* Handle invalid CSRF
+*/
 function handleInvalidCSRFToken()
 {
     header('HTTP/1.1 500 Internal Server Error');
@@ -128,32 +132,29 @@ function handleInvalidCSRFToken()
 }
 
 /**
- * Test whether array is associative
- */
+* Test whether array is associative
+*/
 function isAssoc($arr)
 {
     return array_keys($arr) !== range(0, count($arr) - 1);
 }
 
 /**
- * Display a selector field for a form. Arguments are:
- *
- * @param string $name:     Field name
- * @param array  $options:  Array of options
- * @param string $selected: Selected option (optional)
- * @param string $id:       $options is an associative array this should be the key
- * @param string $event:    onChange event (optional)
- * @param string $disabled  (optional)
- */
-function SelectorOptions($name, $options, $selected = null, $id = null, $event = null, $disabled = null)
+*
+* Display a selector field for a form. Arguments are:
+*   $name:     Field name
+*   $options:  Array of options
+*   $selected: Selected option (optional)
+*       If $options is an associative array this should be the key
+*
+*/
+function SelectorOptions($name, $options, $selected = null, $id = null)
 {
     echo '<select class="form-control" name="'.htmlspecialchars($name, ENT_QUOTES).'"';
     if (isset($id)) {
         echo ' id="' . htmlspecialchars($id, ENT_QUOTES) .'"';
     }
-    if (isset($event)) {
-        echo ' onChange="' . htmlspecialchars($event, ENT_QUOTES).'()"';
-    }
+
     echo '>' , PHP_EOL;
     foreach ($options as $opt => $label) {
         $select = '';
@@ -161,10 +162,8 @@ function SelectorOptions($name, $options, $selected = null, $id = null, $event =
         if ($key == $selected) {
             $select = ' selected="selected"';
         }
-        if ($key == $disabled) {
-            $disabled = ' disabled';
-        }
-        echo '<option value="'.htmlspecialchars($key, ENT_QUOTES).'"'.$select.$disabled.'>'.
+
+        echo '<option value="'.htmlspecialchars($key, ENT_QUOTES).'"'.$select.'>'.
             htmlspecialchars($label, ENT_QUOTES).'</option>' , PHP_EOL;
     }
 
@@ -172,13 +171,13 @@ function SelectorOptions($name, $options, $selected = null, $id = null, $event =
 }
 
 /**
- *
- * @param  string $input
- * @param  string $string
- * @param  int    $offset
- * @param  string $separator
- * @return $string
- */
+*
+* @param string $input
+* @param string $string
+* @param int $offset
+* @param string $separator
+* @return $string
+*/
 function GetDistString($input, $string, $offset, $separator)
 {
     $string = substr($input, strpos($input, $string)+$offset, strpos(substr($input, strpos($input, $string)+$offset), $separator));
@@ -186,10 +185,10 @@ function GetDistString($input, $string, $offset, $separator)
 }
 
 /**
- *
- * @param  array $arrConfig
- * @return $config
- */
+*
+* @param array $arrConfig
+* @return $config
+*/
 function ParseConfig($arrConfig)
 {
     $config = array();
@@ -214,10 +213,10 @@ function ParseConfig($arrConfig)
 }
 
 /**
- *
- * @param  string $freq
- * @return $channel
- */
+*
+* @param string $freq
+* @return $channel
+*/
 function ConvertToChannel($freq)
 {
     if ($freq >= 2412 && $freq <= 2484) {
@@ -237,11 +236,10 @@ function ConvertToChannel($freq)
 }
 
 /**
- * Converts WPA security string to readable format
- *
- * @param  string $security
- * @return string
- */
+* Converts WPA security string to readable format
+* @param string $security
+* @return string
+*/
 function ConvertToSecurity($security)
 {
     $options = array();
@@ -271,15 +269,15 @@ function ConvertToSecurity($security)
 /**
  * Renders a simple PHP template
  */
-function renderTemplate($name, $__template_data = [])
+function renderTemplate($name, $data = [])
 {
     $file = realpath(dirname(__FILE__) . "/../templates/$name.php");
     if (!file_exists($file)) {
         return "template $name ($file) not found";
     }
 
-    if (is_array($__template_data)) {
-        extract($__template_data);
+    if (is_array($data)) {
+        extract($data);
     }
 
     ob_start();
@@ -332,128 +330,3 @@ function cache($key, $callback)
         return $data;
     }
 }
-
-// insspired by
-// http://markushedlund.com/dev/php-escapeshellarg-with-unicodeutf-8-support
-function mb_escapeshellarg($arg)
-{
-    $isWindows = strtolower(substr(PHP_OS, 0, 3)) === 'win';
-    if ($isWindows) {
-        $escaped_arg = str_replace(array('"', '%'), '', $arg);
-    } else {
-        $escaped_arg = str_replace("'", "'\\''", $arg);
-    }
-    return "\"$escaped_arg\"";
-}
-
-function dnsServers()
-{
-    $data = json_decode(file_get_contents("./config/dns-servers.json"));
-    return (array) $data;
-}
-
-function blocklistProviders()
-{
-    $data = json_decode(file_get_contents("./config/blocklists.json"));
-    return (array) $data;
-}
-
-function optionsForSelect($options)
-{
-    $html = "";
-    foreach ($options as $key => $value) {
-        // optgroup
-        if (is_array($value)) {
-            $html .= "<optgroup label=\"$key\">";
-            $html .= optionsForSelect($value);
-            $html .= "</optgroup>";
-        }
-        // option
-        else {
-            $key = is_int($key) ? $value : $key;
-            $html .= "<option value=\"$value\">$key</option>";
-        }
-    }
-    return $html;
-}
-
-function blocklistUpdated($file)
-{
-    $blocklist = RASPI_CONFIG.'/adblock/'.$file;
-    if (file_exists($blocklist)) {
-        $lastModified = date ("F d Y H:i:s.", filemtime($blocklist));
-        $lastModified = formatDateAgo($lastModified);
-        return $lastModified;
-    } else {
-        return 'Never';
-    }
-}
-
-function formatDateAgo($datetime, $full = false)
-{
-    $now = new DateTime;
-    $ago = new DateTime($datetime);
-    $diff = $now->diff($ago);
-
-    $diff->w = floor($diff->d / 7);
-    $diff->d -= $diff->w * 7;
-
-    $string = array(
-        'y' => 'year',
-        'm' => 'month',
-        'w' => 'week',
-        'd' => 'day',
-        'h' => 'hour',
-        'i' => 'minute',
-        's' => 'second',
-    );
-    foreach ($string as $k => &$v) {
-        if ($diff->$k) {
-            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
-        } else {
-            unset($string[$k]);
-        }
-    }
-    if (!$full) $string = array_slice($string, 0, 1);
-    return $string ? implode(', ', $string) . ' ago' : 'just now';
-}
-
-function getThemeOpt()
-{
-    if (!isset($_COOKIE['theme'])) {
-        $theme = "custom.php";
-    } else {
-        $theme = $_COOKIE['theme'];
-    }
-    return 'app/css/'.htmlspecialchars($theme, ENT_QUOTES);
-}
-
-function getColorOpt()
-{
-    if (!isset($_COOKIE['color'])) {
-        $color = "#d8224c";
-    } else {
-        $color = $_COOKIE['color'];
-    }
-    return $color;
-}
-function getSidebarState()
-{
-    if ($_COOKIE['sidebarToggled'] == 'true' ) {
-        return"toggled";
-    }
-}
-
-// Returns bridged AP mode status
-function getBridgedState()
-{
-    $arrHostapdConf = parse_ini_file(RASPI_CONFIG.'/hostapd.ini');
-    // defaults to false
-    return  $arrHostapdConf['BridgedEnable'];
-}
-
-// Validates a host or FQDN
-function validate_host($host) {
-  return preg_match('/^([a-z\d](-*[a-z\d])*)(\.([a-z\d](-*[a-z\d])*))*$/i', $host);
-}
-

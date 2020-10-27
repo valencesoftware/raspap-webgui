@@ -1,24 +1,21 @@
 <?php
 /**
- *
- *
- */
-function DisplayThemeConfig(&$extraFooterScripts)
+*
+*
+*/
+function DisplayThemeConfig()
 {
     $themes = [
         "default"    => "RaspAP (default)",
         "hackernews" => "HackerNews",
-        "lightsout"  => "Lights Out"
+        "terminal"   => "Terminal"
     ];
     $themeFiles = [
-        "default"    => "custom.php",
+        "default"    => "custom.css",
         "hackernews" => "hackernews.css",
-        "lightsout"  => "lightsout.css"
+        "terminal"   => "terminal.css"
     ];
     $selectedTheme = array_search($_COOKIE['theme'], $themeFiles);
 
     echo renderTemplate("themes", compact("themes", "selectedTheme"));
-
-    $extraFooterScripts[] = array('src'=>'dist/huebee/huebee.pkgd.min.js', 'defer'=>false);
-    $extraFooterScripts[] = array('src'=>'app/js/huebee.js', 'defer'=>false);
 }

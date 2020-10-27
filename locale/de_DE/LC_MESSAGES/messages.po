@@ -1,23 +1,26 @@
+# RaspAP Portable Object file
+# Project home: https://github.com/billz/raspap-webgui
+# Licensed under the GNU General Public License v3.0
+# This file is distributed under the same license as the RaspAP package
+# FIRST AUTHOR billzimmerman@gmail.com, 2017
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: raspap\n"
-"Report-Msgid-Bugs-To: Bill Zimmerman <billzimmerman@gmail.com>\n"
+"Project-Id-Version: 1.2.1\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-19 08:56+0000\n"
-"PO-Revision-Date: 2020-04-12 10:21\n"
-"Last-Translator: Bill Zimmerman <billzimmerman@gmail.com>\n"
-"Language-Team: German\n"
+"PO-Revision-Date: 2019-10-21 23:15+0000\n"
+"Last-Translator: Tino Undeutsch\n"
+"Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: raspap\n"
-"X-Crowdin-Language: de\n"
-"X-Crowdin-File: /master/locale/en_US/LC_MESSAGES/messages.po\n"
 
 #: index.php
 msgid "RaspAP Wifi Configuration Portal"
-msgstr "RaspAP Wifi Konfigurationsportal"
+msgstr "RaspAP WLAN Konfiguration Portal"
 
 msgid "Toggle navigation"
 msgstr "Navigation umschalten"
@@ -28,32 +31,26 @@ msgstr "RaspAP WLAN Portal"
 msgid "Dashboard"
 msgstr "Übersicht"
 
-msgid "WiFi client"
-msgstr "WLAN Client"
+msgid "Configure WiFi client"
+msgstr "WLAN Client einrichten"
 
-msgid "Hotspot"
-msgstr "Hotspot"
+msgid "Configure hotspot"
+msgstr "Hotspot einrichten"
 
-msgid "Memory Use"
-msgstr ""
+msgid "Configure networking"
+msgstr "Netzwerk einrichten"
 
-msgid "CPU Temp"
-msgstr ""
+msgid "Configure DHCP Server"
+msgstr "DHCP Server einrichten"
 
-msgid "Networking"
-msgstr "Netzwerk"
+msgid "Configure OpenVPN"
+msgstr "OpenVPN einrichten"
 
-msgid "DHCP Server"
-msgstr "DHCP-Server"
+msgid "Configure TOR proxy"
+msgstr "TOR Proxy einrichten"
 
-msgid "OpenVPN"
-msgstr "OpenVPN"
-
-msgid "TOR proxy"
-msgstr "TOR Proxy"
-
-msgid "Authentication"
-msgstr "Authentifizierung"
+msgid "Configure Auth"
+msgstr "Authentifizierung einrichten"
 
 msgid "Change Theme"
 msgstr "Oberflächendesign ändern"
@@ -75,10 +72,10 @@ msgid "Username must not be empty"
 msgstr "Benutzername darf nicht leer sein"
 
 msgid "Admin password updated"
-msgstr "Admin-Passwort aktualisiert"
+msgstr "Administrator Passwort aktualisiert"
 
 msgid "Failed to update admin password"
-msgstr "Fehler beim Aktualisieren des Admin-Passwortes"
+msgstr "Aktualisierung Admin Password fehlgeschlagen"
 
 msgid "Old password does not match"
 msgstr "Altes Passwort nicht korrekt"
@@ -87,7 +84,7 @@ msgid "Username"
 msgstr "Benutzername"
 
 msgid "Old password"
-msgstr "Altes Password"
+msgstr "Altes Passwort"
 
 msgid "New password"
 msgstr "Neues Passwort"
@@ -109,7 +106,7 @@ msgid "Security"
 msgstr "Sicherheit"
 
 msgid "Passphrase"
-msgstr "Passwort"
+msgstr "Passphrase"
 
 msgid "Wifi settings updated successfully"
 msgstr "WLAN Einstellungen erfolgreich aktualisert"
@@ -194,7 +191,7 @@ msgid "Bitrate"
 msgstr "Bitrate"
 
 msgid "Signal Level"
-msgstr "Signalpegel"
+msgstr "Signalstärke"
 
 msgid "Transmit Power"
 msgstr "Sendeleistung"
@@ -233,10 +230,10 @@ msgid "Interface already down"
 msgstr "Schnittstelle bereits aus"
 
 msgid "Start wlan0"
-msgstr "wlan0 starten"
+msgstr "Start wlan0"
 
 msgid "Stop wlan0"
-msgstr "wlan0 beenden"
+msgstr "Stop wlan0"
 
 msgid "Connected Devices"
 msgstr "Verbundene Geräte"
@@ -250,9 +247,6 @@ msgstr "Client Liste"
 
 msgid "Interface"
 msgstr "Schnittstelle"
-
-msgid "DNS Server"
-msgstr "DNS-Server"
 
 msgid "Starting IP Address"
 msgstr "Erste IP Addresse"
@@ -285,16 +279,16 @@ msgid "Host name"
 msgstr "Rechnername"
 
 msgid "Client ID"
-msgstr "Client-ID"
+msgstr "Client ID"
 
 msgid "Information provided by Dnsmasq"
 msgstr "Informationen von 'Dnsmasq'"
 
 msgid "Stop dnsmasq"
-msgstr "dnsmasq beenden"
+msgstr "Stop dnsmasq"
 
 msgid "Start dnsmasq"
-msgstr "dnsmasq starten"
+msgstr "Start dnsmasq"
 
 msgid "Dnsmasq configuration updated successfully"
 msgstr "Dnsmasq Konfiguration erfolgreich übernommen"
@@ -322,33 +316,6 @@ msgstr "Dnsmasq läuft"
 
 msgid "Dnsmasq is not running"
 msgstr "Dnsmasq läuft nicht"
-
-msgid "Upstream DNS servers"
-msgstr "Upstream DNS-Server"
-
-msgid "Only ever query DNS servers configured below"
-msgstr "Nur folgende DNS-Server abfragen"
-
-msgid "Enable this option if you want RaspAP to <b>send DNS queries to the servers configured below exclusively</b>. By default RaspAP also uses its upstream DHCP server's name servers."
-msgstr "Aktivieren Sie diese Option, wenn Sie möchten, dass RaspAP <b>DNS-Abfragen an die unten konfigurierten Server sendet.</b>Standardmäßig verwendet RaspAP auch die Nameserver des ursprünglichen DHCP-Servers."
-
-msgid "This option adds <code>no-resolv</code> to the dnsmasq configuration."
-msgstr "Diese Option fügt <code>no-resolv</code> zur dnsmasq-Konfiguration hinzu."
-
-msgid "Add upstream DNS server"
-msgstr "Upstream DNS-Server hinzufügen"
-
-msgid "Format"
-msgstr "Format"
-
-msgid "Choose a hosted server"
-msgstr "Gehosteten Server auswählen"
-
-msgid "Log DHCP requests"
-msgstr "DHCP-Anfragen protokollieren"
-
-msgid "Log DNS queries"
-msgstr "DNS-Anfragen protokollieren"
 
 #: includes/hostapd.php
 msgid "Basic"
@@ -420,9 +387,6 @@ msgstr "Hotspot starten"
 msgid "Stop hotspot"
 msgstr "Hotspot anhalten"
 
-msgid "Restart hotspot"
-msgstr "Neustart hotspot"
-
 msgid "Enable logging"
 msgstr "Aktiviere Protokoll"
 
@@ -431,9 +395,6 @@ msgstr "Logfile Ausgabe"
 
 msgid "WiFi client AP mode"
 msgstr "AP-Modus von WiFI-Client"
-
-msgid "Bridged AP mode"
-msgstr ""
 
 msgid "Hide SSID in broadcast"
 msgstr "SSID in der Übertragung ausblenden"
@@ -453,6 +414,9 @@ msgstr "Aktuelle Einstellungen"
 
 msgid "Default Gateway"
 msgstr "Standardgateway"
+
+msgid "DNS Server"
+msgstr "DNS Server"
 
 msgid "Alternate DNS Server"
 msgstr "DNS-Server wechseln"
@@ -612,7 +576,7 @@ msgid "Diffie Hellman parameters"
 msgstr "Diffie-Hellman-Parameter"
 
 msgid "KeepAlive"
-msgstr ""
+msgstr "KeepAlive"
 
 msgid "Server log"
 msgstr "Serverprotokoll"
@@ -666,10 +630,6 @@ msgstr "Versuch, TOR zu starten"
 msgid "Attempting to stop TOR"
 msgstr "Versuch, TOR zu stoppen"
 
-#: template/dashboard.php
-msgid "Bridged AP mode is enabled. For Hostname and IP, see your router's admin page."
-msgstr ""
-
 #: common form controls
 msgid "Save settings"
 msgstr "Einstellungen speichern"
@@ -691,46 +651,4 @@ msgstr "oben"
 
 msgid "down"
 msgstr "unten"
-
-msgid "adblock"
-msgstr ""
-
-msgid "Ad Blocking"
-msgstr ""
-
-msgid "Start Ad Blocking"
-msgstr ""
-
-msgid "Restart Ad Blocking"
-msgstr ""
-
-msgid "Blocklist settings"
-msgstr ""
-
-msgid "Enable blocklists"
-msgstr ""
-
-msgid "Enable this option if you want RaspAP to <b>block DNS requests for ads, tracking and other virtual garbage</b>. Blocklists are gathered from multiple, actively maintained sources and automatically updated, cleaned, optimized and moderated on a daily basis."
-msgstr ""
-
-msgid "This option adds <code>conf-file</code> and <code>addn-hosts</code> to the dnsmasq configuration."
-msgstr ""
-
-msgid "Choose a blocklist provider"
-msgstr ""
-
-msgid "Hostnames blocklist last updated"
-msgstr ""
-
-msgid "Domains blocklist last updated"
-msgstr ""
-
-msgid "Update now"
-msgstr "Jetzt aktualisieren"
-
-msgid "Statistics"
-msgstr "Statistiken"
-
-msgid "Information provided by adblock"
-msgstr ""
 

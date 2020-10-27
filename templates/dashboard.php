@@ -1,19 +1,11 @@
 <?php
-$arrHostapdConf = parse_ini_file(RASPI_CONFIG.'/hostapd.ini');
+$arrHostapdConf = parse_ini_file('/etc/raspap/hostapd.ini');
 if ($arrHostapdConf['WifiAPEnable'] == 1) {
-    $client_interface = 'uap0';
+    $client_iface = 'uap0';
 } else {
-    $client_interface = $_SESSION['wifi_client_interface'];
+    $client_iface = RASPI_WIFI_CLIENT_INTERFACE;
 }
-$ap_iface = $_SESSION['ap_interface'];
-$MACPattern = '"([[:xdigit:]]{2}:){5}[[:xdigit:]]{2}"';
-if ($arrHostapdConf['BridgedEnable'] == 1) {
-    $moreLink = "index.php?page=hostapd_conf";
-    exec('iw dev '.$ap_iface.' station dump | grep -oE '.$MACPattern, $clients);
-} else {
-    $moreLink = "index.php?page=dhcpd_conf";
-    exec('cat '.RASPI_DNSMASQ_LEASES.'| grep -E $(iw dev '.$ap_iface.' station dump | grep -oE '.$MACPattern.' | paste -sd "|")', $clients);
-}
+exec('cat '.RASPI_DNSMASQ_LEASES.'| grep -E $(arp -i '.$client_iface.' -n | grep -oE "(([0-9]|[a-f]|[A-F]){2}:){5}([0-9]|[a-f]|[A-F]){2}" | tr "\n" "\|" | sed "s/.$//")', $clients);
 $ifaceStatus = $wlan0up ? "up" : "down";
 ?>
 <div class="row">
@@ -21,116 +13,95 @@ $ifaceStatus = $wlan0up ? "up" : "down";
     <div class="card">
       <div class="card-header">
         <div class="row">
-    <div class="col">
-      <i class="fas fa-tachometer-alt fa-fw mr-2"></i><?php echo _("Dashboard"); ?>
-    </div>
-    <div class="col">
-      <button class="btn btn-light btn-icon-split btn-sm service-status float-right">
-        <span class="icon"><i class="fas fa-circle service-status-<?php echo $ifaceStatus ?>"></i></span>
-        <span class="text service-status"><?php echo strtolower($ap_iface) .' '. _($ifaceStatus) ?></span>
-      </button>
-    </div>
+	  <div class="col">
+	    <i class="fas fa-tachometer-alt fa-fw mr-2"></i><?php echo _("Dashboard"); ?>
+	  </div>
+	  <div class="col">
+	    <button class="btn btn-light btn-icon-split btn-sm service-status float-right">
+	      <span class="icon"><i class="fas fa-circle service-status-<?php echo $ifaceStatus ?>"></i></span>
+	      <span class="text service-status"><?php echo strtolower($client_iface) .' '. _($ifaceStatus) ?></span>
+	    </button>
+	  </div>
         </div><!-- /.row -->
       </div><!-- /.card-header -->
-
       <div class="card-body">
         <div class="row">
-
-          <div class="col-lg-12">
-            <div class="card mb-3">
-              <div class="card-body">
-                <h4><?php echo _("Hourly traffic amount"); ?></h4>
-                <div id="divInterface" class="d-none"><?php echo $_SESSION['ap_interface']; ?></div>
-                <div class="col-md-12">
-                  <canvas id="divDBChartBandwidthhourly"></canvas>
-                </div>
-              </div><!-- /.card-body -->
-            </div><!-- /.card-->
-          </div>
-
-          <div class="col-sm-6 align-items-stretch">
+          <div class="col-md-6 mb-3">
             <div class="card h-100">
               <div class="card-body wireless">
-                <h4><?php echo _("Wireless Client"); ?></h4>
-                <div class="row justify-content-md-center">
-                <div class="col-md">
+                <h4><?php echo _("Wireless Information"); ?></h4>
                 <div class="info-item"><?php echo _("Connected To"); ?></div><div><?php echo htmlspecialchars($connectedSSID, ENT_QUOTES); ?></div>
-                <div class="info-item"><?php echo _("Interface"); ?></div><div><?php echo htmlspecialchars($_SESSION['wifi_client_interface']); ?></div>
                 <div class="info-item"><?php echo _("AP Mac Address"); ?></div><div><?php echo htmlspecialchars($connectedBSSID, ENT_QUOTES); ?></div>
                 <div class="info-item"><?php echo _("Bitrate"); ?></div><div><?php echo htmlspecialchars($bitrate, ENT_QUOTES); ?></div>
                 <div class="info-item"><?php echo _("Signal Level"); ?></div><div><?php echo htmlspecialchars($signalLevel, ENT_QUOTES); ?></div>
                 <div class="info-item"><?php echo _("Transmit Power"); ?></div><div><?php echo htmlspecialchars($txPower, ENT_QUOTES); ?></div>
                 <div class="info-item"><?php echo _("Frequency"); ?></div><div><?php echo htmlspecialchars($frequency, ENT_QUOTES); ?></div>
-              </div>
-              <div class="col-md mt-2 d-flex justify-content-center">
+                <div class="info-item"><?php echo _("Link Quality"); ?></div>
                 <script>var linkQ = <?php echo json_encode($strLinkQuality); ?>;</script>
                 <div class="chart-container">
-                  <canvas id="divChartLinkQ"></canvas>
+                  <canvas id="canvas" class="chartjs-render-monitor"></canvas>
                 </div>
-                </div><!--row-->
-              </div>
              </div><!-- /.card-body -->
             </div><!-- /.card -->
           </div><!-- /.col-md-6 -->
-          <div class="col-sm-6">
-            <div class="card h-100 mb-3">
+          <div class="col-md-6">
+	    <div class="card mb-3">
               <div class="card-body">
+                <h4><?php echo _("Interface Information"); ?></h4>
+                <div class="info-item"><?php echo _("Interface Name"); ?></div><div><?php echo RASPI_WIFI_CLIENT_INTERFACE; ?></div>
+                <div class="info-item"><?php echo _("IPv4 Address"); ?></div><div><?php echo htmlspecialchars($ipv4Addrs, ENT_QUOTES); ?></div>
+                <div class="info-item"><?php echo _("Subnet Mask"); ?></div><div><?php echo htmlspecialchars($ipv4Netmasks, ENT_QUOTES); ?></div>
+                <div class="info-item"><?php echo _("IPv6 Address"); ?></div><div><?php echo htmlspecialchars($ipv6Addrs, ENT_QUOTES); ?></div>
+                <div class="info-item"><?php echo _("Mac Address"); ?></div><div><?php echo htmlspecialchars($macAddr, ENT_QUOTES); ?></div>
+              </div><!-- /.card-body -->
+            </div><!-- /.card-->
+            <div class="card mb-3">
+              <div class="card-body">
+                <h4><?php echo _("Interface Statistics"); ?></h4>
+                <div class="info-item"><?php echo _("Received Packets"); ?></div><div><?php echo number_format($strRxPackets); ?></div>
+                <div class="info-item"><?php echo _("Received Bytes"); ?></div><div><?php echo number_format($strRxBytes); ?></div>
+                <div class="info-item"><?php echo _("Transferred Packets"); ?></div><div><?php echo number_format($strTxPackets); ?></div>
+                <div class="info-item"><?php echo _("Transferred Bytes"); ?></div><div><?php echo number_format($strTxBytes); ?></div>
+              </div><!-- /.card-body -->
+            </div><!-- /.card -->
+            <div class="card mb-3">
+              <div class="card-body wireless">
                 <h4><?php echo _("Connected Devices"); ?></h4>
                 <div class="table-responsive">
                   <table class="table table-hover">
                     <thead>
                       <tr>
-                        <?php if ($arrHostapdConf['BridgedEnable'] == 1) : ?>
-                          <th><?php echo _("MAC Address"); ?></th>
-                        <?php else : ?>
-                          <th><?php echo _("Host name"); ?></th>
-                          <th><?php echo _("IP Address"); ?></th>
-                          <th><?php echo _("MAC Address"); ?></th>
-                        <?php endif; ?>
+                        <th><?php echo _("Host name"); ?></th>
+                        <th><?php echo _("IP Address"); ?></th>
+                        <th><?php echo _("MAC Address"); ?></th>
                       </tr>
                     </thead>
                     <tbody>
-                        <?php if ($arrHostapdConf['BridgedEnable'] == 1) : ?>
-                          <tr>
-                            <td><small class="text-muted"><?php echo _("Bridged AP mode is enabled. For Hostname and IP, see your router's admin page.");?></small></td>
-                          </tr>
-                        <?php endif; ?>
-                        <?php foreach (array_slice($clients,0, 2) as $client) : ?>
-                        <tr>
-                          <?php if ($arrHostapdConf['BridgedEnable'] == 1): ?>
-                            <td><?php echo htmlspecialchars($client, ENT_QUOTES) ?></td>
-                          <?php else : ?>
+                        <?php foreach ($clients as $client) : ?>
                             <?php $props = explode(' ', $client) ?>
-                            <td><?php echo htmlspecialchars($props[3], ENT_QUOTES) ?></td>
-                            <td><?php echo htmlspecialchars($props[2], ENT_QUOTES) ?></td>
-                            <td><?php echo htmlspecialchars($props[1], ENT_QUOTES) ?></td>
-                          <?php endif; ?>
+                        <tr>
+                          <td><?php echo htmlspecialchars($props[3], ENT_QUOTES) ?></td>
+                          <td><?php echo htmlspecialchars($props[2], ENT_QUOTES) ?></td>
+                          <td><?php echo htmlspecialchars($props[1], ENT_QUOTES) ?></td>
                         </tr>
                         <?php endforeach ?>
                     </tbody>
                   </table>
-                  <?php if (sizeof($clients) >2) : ?>
-                      <div class="col-lg-12 float-right">
-                        <a class="btn btn-outline-info" role="button" href="<?php echo $moreLink ?>"><?php echo _("More");?>  <i class="fas fa-chevron-right"></i></a>
-                      </div>
-                  <?php elseif (sizeof($clients) ==0) : ?>
-                      <div class="col-lg-12 mt-3"><?php echo _("No connected devices");?></div>
-                  <?php endif; ?>
                 </div><!-- /.table-responsive -->
               </div><!-- /.card-body -->
             </div><!-- /.card -->
           </div><!-- /.col-md-6 -->
         </div><!-- /.row -->
 
-        <div class="col-lg-12 mt-3">
+        <div class="col-lg-12">
           <div class="row">
             <form action="?page=wlan0_info" method="POST">
                 <?php echo CSRFTokenFieldTag() ?>
                 <?php if (!RASPI_MONITOR_ENABLED) : ?>
                     <?php if (!$wlan0up) : ?>
-                    <input type="submit" class="btn btn-success" value="<?php echo _("Start").' '.$client_interface ?>" name="ifup_wlan0" />
+                    <input type="submit" class="btn btn-success" value="<?php echo _("Start").' '.RASPI_WIFI_CLIENT_INTERFACE ?>" name="ifup_wlan0" />
                     <?php else : ?>
-                    <input type="submit" class="btn btn-warning" value="<?php echo _("Stop").' '.$client_interface ?>"  name="ifdown_wlan0" />
+                    <input type="submit" class="btn btn-warning" value="<?php echo _("Stop").' '.RASPI_WIFI_CLIENT_INTERFACE ?>"  name="ifdown_wlan0" />
                     <?php endif ?>
                 <?php endif ?>
               <a href="?page=<?php echo $_GET['page'] ?>" class="btn btn-outline btn-primary"><i class="fas fa-sync-alt"></i> <?php echo _("Refresh") ?></a>
@@ -143,9 +114,3 @@ $ifaceStatus = $wlan0up ? "up" : "down";
     </div><!-- /.card -->
   </div><!-- /.col-lg-12 -->
 </div><!-- /.row -->
-<script type="text/javascript"<?php //echo ' nonce="'.$csp_page_nonce.'"'; ?>>
-// js translations:
-var t = new Array();
-t['send'] = '<?php echo addslashes(_('Send')); ?>';
-t['receive'] = '<?php echo addslashes(_('Receive')); ?>';
-</script>
